@@ -2,10 +2,7 @@ package com.example.microservice.orderservice.service;
 
 import com.example.microservice.orderservice.Enum.OrderStatus;
 import com.example.microservice.orderservice.Exception.NotFoundException;
-import com.example.microservice.orderservice.dto.InventoryResponse;
-import com.example.microservice.orderservice.dto.OrderRequest;
-import com.example.microservice.orderservice.dto.OrderedItemsRequest;
-import com.example.microservice.orderservice.dto.UserDto;
+import com.example.microservice.orderservice.dto.*;
 import com.example.microservice.orderservice.model.Order;
 import com.example.microservice.orderservice.model.OrderedItems;
 import com.example.microservice.orderservice.repo.OrderRepo;
@@ -27,13 +24,14 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepo orderRepo;
     private final ProductWebClientService productWebClientService;
     private final  UserWebClientService userWebClientService;
-    public Order placeholder(OrderRequest request) {
+    public Order placeOrder(OrderRequest request) {
 
         UserDto userDto = userWebClientService.getUserById(request.getUserId());
 
         if (userDto == null) {
             throw new NotFoundException("User not found with ID: " + request.getUserId());
         }
+
         Order order = new Order();
 
         order.setOrderNumber(UUID.randomUUID().toString());
@@ -58,6 +56,7 @@ public class OrderServiceImpl implements OrderService {
 
         log.info("SKU codes extracted from the order: {}", names);
 
+        //checks the stock availability for each product by calling 
         InventoryResponse[] productResponses = productWebClientService.checkStock(names);
 
         if (productResponses == null || productResponses.length == 0) {
@@ -108,4 +107,15 @@ public class OrderServiceImpl implements OrderService {
         orderedItems.setProductId(itemsRequest.getProductId());
         return orderedItems;
     }
+
+
+    @Override
+    public List<Order> getOrdersByProductType(Long id) {
+        ProductTypeDto userDto = productWebClientService.getProductTypeById(id);
+
+        if (userDto != null) {
+            return orderRepo.findByUserId(userDto.getId());
+        } else {
+            throw new NotFoundException("User not found with ID: " + userId);
+        }    }
 }

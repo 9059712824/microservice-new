@@ -2,7 +2,9 @@ package com.example.task.restproductapi.service;
 
 import com.example.task.restproductapi.Dto.InventoryResponse;
 import com.example.task.restproductapi.entities.Product;
+import com.example.task.restproductapi.entities.ProductType;
 import com.example.task.restproductapi.repository.ProductRepository;
+import com.example.task.restproductapi.repository.ProductTypeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import java.util.Optional;
 @Slf4j
 public class InventoryServiceImpl implements InventoryService {
     private final ProductRepository productRepository;
+    private final ProductTypeRepository productTypeRepository;
     public List<InventoryResponse> isInStock(List<String> names) {
         log.info("Checking Inventory");
 
@@ -32,7 +35,7 @@ public class InventoryServiceImpl implements InventoryService {
             // Check if the product exists and is in stock
             boolean isInStock = optionalProduct.isPresent() && optionalProduct.get().getQuantity() > 0;
             Long quantity=optionalProduct.get().getQuantity();
-            
+
             // Create a InventoryResponse object and add it to the list
             InventoryResponse productResponse = InventoryResponse.builder()
                     .name(name)
@@ -44,4 +47,6 @@ public class InventoryServiceImpl implements InventoryService {
 
         return productResponses;
     }
+
+
 }

@@ -7,8 +7,9 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 public interface OrderService {
-     Order placeholder(OrderRequest request);
+     Order placeOrder(OrderRequest request);
      List<Order> getAllOrders();
      List<Order> getOrdersByUserId(Long userId);
+    List<Order> getOrdersByProductType(Long id);
 
 }

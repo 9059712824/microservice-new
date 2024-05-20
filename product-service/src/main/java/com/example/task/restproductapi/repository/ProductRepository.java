@@ -10,8 +10,11 @@ import com.example.task.restproductapi.entities.ProductType;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    List<Product> findByType(ProductType type);
+    List<Product> findByType_Id(Long id);
     List<Product> findByNameIn(List<String> names);
+//    List<Product> findByNameInAndType(List<String> names, ProductType type);
+
+
 
 
 }

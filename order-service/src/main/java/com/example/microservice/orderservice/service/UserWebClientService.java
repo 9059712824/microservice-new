@@ -13,7 +13,7 @@ public class UserWebClientService {
     public UserDto getUserById(Long userId) {
         return webClientBuilder.build()
                 .get()
-                .uri("http://product-service:8080/users/user/{id}", userId)
+                .uri("http://product-service/users/user/{id}", userId)
                 .retrieve()
                 .bodyToMono(UserDto.class)
                 .block();

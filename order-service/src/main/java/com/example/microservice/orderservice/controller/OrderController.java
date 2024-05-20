@@ -29,12 +29,12 @@ public class OrderController {
      * @param request The request containing order details.
      * @return ResponseEntity<OrderResponse> Returns HTTP status and order response.
      */
-    @PostMapping()
+    @PostMapping("/")
     public ResponseEntity<OrderResponse> placeOrder(@RequestBody OrderRequest request){
 
         log.info("{}",request);
 
-        Order order = orderService.placeholder(request);
+        Order order = orderService.placeOrder(request);
         if (order == null) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new OrderResponse("Failed to place order.", null));
         }
@@ -60,12 +60,23 @@ public class OrderController {
         }
     }
 
+
+    @GetMapping("/productType/{id}")
+    public ResponseEntity<List<Order>> getOrdersByProductType(@PathVariable Long id) {
+        List<Order> orders = orderService.getOrdersByProductType(id);
+        if (orders.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(orders);
+        }
+    }
+
     /**
      * Endpoint to retrieve all orders.
      *
      * @return ResponseEntity<List<Order>> Returns HTTP status and list of all orders.
      */
-    @GetMapping()
+    @GetMapping("/getall")
     public ResponseEntity<List<Order>> getAllOrders() {
         List<Order> orders = orderService.getAllOrders();
         if (orders.isEmpty()) {

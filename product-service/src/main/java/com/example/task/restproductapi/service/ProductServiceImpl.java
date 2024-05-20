@@ -1,10 +1,8 @@
 package com.example.task.restproductapi.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import com.example.task.restproductapi.Dto.InventoryResponse;
+import com.example.task.restproductapi.repository.ProductTypeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 @Slf4j
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
+    private final ProductTypeRepository productTypeRepository;
 
     private static final String PRODUCT_NOT_FOUND_IN_DB = "No Product Found of this Id in Database ";
 
@@ -42,7 +41,7 @@ public class ProductServiceImpl implements ProductService {
 
     public Product updateProduct(Long productId, Product updatedProduct) {
         Product existingProduct = productRepository.findById(productId)
-                .orElseThrow(() -> new RuntimeException(PRODUCT_NOT_FOUND_IN_DB));
+                .orElseThrow(() -> new NotFoundException(PRODUCT_NOT_FOUND_IN_DB));
 
         existingProduct.setName(updatedProduct.getName());
         existingProduct.setDescription(updatedProduct.getDescription());
@@ -57,8 +56,9 @@ public class ProductServiceImpl implements ProductService {
         productRepository.delete(getProductById(id));
     }
     @Override
-    public List<Product> getAllProductByType(ProductType type) {
-        return productRepository.findByType(type);
+    public List<Product> getAllProductByType(Long typeId) {
+        ProductType productType=productTypeRepository.findById(typeId).orElseThrow(() -> new NotFoundException("Products not found with typeId "+typeId));
+        return productRepository.findByType_Id(productType.getId());
     }
 
     private RuntimeException notFoundException(String message) {

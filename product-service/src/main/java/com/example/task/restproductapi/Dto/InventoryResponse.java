@@ -13,4 +13,5 @@ public class InventoryResponse {
     private String name;
     private Long quantity;
     private boolean isInStock;
+//    private String productTypeName;
 }

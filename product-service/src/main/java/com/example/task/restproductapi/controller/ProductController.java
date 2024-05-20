@@ -76,11 +76,9 @@ public class ProductController {
         }
     }
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
-    @GetMapping("/type/{id}") // shows products that are only linked with producttype
-    public ResponseEntity<List<Product>> getProductOfProductTypeById(@PathVariable Long id) {
-        ProductType type = new ProductType();
-        type.setId(id);
-        List<Product> allProductByType = this.productService.getAllProductByType(type);
+    @GetMapping("/type/{id}")
+    public ResponseEntity<List<Product>> getProductByProductTypeId(@PathVariable Long id) {
+        List<Product> allProductByType = this.productService.getAllProductByType(id);
         if (allProductByType.isEmpty()) {
             throw new NotFoundException(PRODUCT_TYPE_NOT_FOUND_MESSAGE + id);
         } else {

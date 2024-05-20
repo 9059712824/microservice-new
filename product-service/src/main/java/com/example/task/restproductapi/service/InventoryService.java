@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface InventoryService {
     List<InventoryResponse> isInStock(List<String> names);
+//    List<InventoryResponse> isInStockByType(List<String> names, String productTypeName);
 
 }

@@ -1,6 +1,8 @@
 package com.example.microservice.orderservice.service;
 
 import com.example.microservice.orderservice.dto.InventoryResponse;
+
+import com.example.microservice.orderservice.dto.ProductDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,7 @@ public class ProductWebClientService {
     private final WebClient.Builder webClientBuilder;
 
     public InventoryResponse[] checkStock(List<String> names) {
-        String url = "http://product-service:8080/inventory/checkStock?name=" + String.join(",", names);
+        String url = "http://product-service/inventory/checkStock?name=" + String.join(",", names);
         log.info("Request URL: {}", url);
 
         return webClientBuilder.build().get()
@@ -29,4 +31,22 @@ public class ProductWebClientService {
                 })
                 .block();
     }
+
+        public ProductTypeDto getProductTypeById(Long id) {
+        return webClientBuilder.build()
+                .get()
+                .uri("http://product-service/productType/{id}", id)
+                .retrieve()
+                .bodyToMono(ProductTypeDto.class)
+                .block();
+    }
+
+    public ProductDto getProductById(Long id){
+        return webClientBuilder.build()
+                .get()
+                .uri("http://product-service/api/product/{id}", id)
+                .retrieve()
+                .bodyToMono(ProductDto.class)
+                .block();    }
+
 }
