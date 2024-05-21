@@ -1,6 +1,6 @@
 package com.example.task.restproductapi.service;
 
-import com.example.task.restproductapi.entities.NotFoundException;
+import com.example.task.restproductapi.exceptions.NotFoundException;
 import com.example.task.restproductapi.entities.ProductType;
 import com.example.task.restproductapi.repository.ProductTypeRepository;
 import lombok.RequiredArgsConstructor;

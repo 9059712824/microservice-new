@@ -11,7 +11,7 @@
  import org.mockito.InjectMocks;
  import org.mockito.Mock;
 
- import com.example.task.restproductapi.entities.NotFoundException;
+ import com.example.task.restproductapi.exceptions.NotFoundException;
  import com.example.task.restproductapi.entities.ProductType;
  import com.example.task.restproductapi.repository.ProductTypeRepository;
  import org.mockito.junit.jupiter.MockitoExtension;

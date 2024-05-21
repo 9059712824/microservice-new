@@ -6,7 +6,7 @@ import com.example.task.restproductapi.repository.ProductTypeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import com.example.task.restproductapi.entities.NotFoundException;
+import com.example.task.restproductapi.exceptions.NotFoundException;
 import com.example.task.restproductapi.entities.Product;
 import com.example.task.restproductapi.entities.ProductType;
 import com.example.task.restproductapi.repository.ProductRepository;

@@ -126,7 +126,7 @@ class ProductControllerTest {
         product1.setName("Product 1");
         productList.add(product1);
 
-        when(productService.getAllProductByType(any(ProductType.class))).thenReturn(productList);
+        when(productService.getAllProductByType(any(Long.class))).thenReturn(productList);
 
         mockMvc = MockMvcBuilders.standaloneSetup(productController).build();
 

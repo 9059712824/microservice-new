@@ -3,6 +3,7 @@ package com.example.microservice.orderservice.service;
 import com.example.microservice.orderservice.Enum.OrderStatus;
 import com.example.microservice.orderservice.Exception.NotFoundException;
 import com.example.microservice.orderservice.dto.*;
+import com.example.microservice.orderservice.mapper.OrderMapper;
 import com.example.microservice.orderservice.model.Order;
 import com.example.microservice.orderservice.model.OrderedItems;
 import com.example.microservice.orderservice.repo.OrderRepo;
@@ -22,9 +23,14 @@ import java.util.stream.Collectors;
 @Transactional
 public class OrderServiceImpl implements OrderService {
     private final OrderRepo orderRepo;
+
     private final ProductWebClientService productWebClientService;
-    private final  UserWebClientService userWebClientService;
-    public Order placeOrder(OrderRequest request) {
+
+    private final UserWebClientService userWebClientService;
+
+    private final OrderMapper orderMapper;
+
+    public PlaceOrderResponseDto placeOrder(OrderRequest request) {
 
         UserDto userDto = userWebClientService.getUserById(request.getUserId());
 
@@ -39,24 +45,27 @@ public class OrderServiceImpl implements OrderService {
         order.setPurchasedDate(LocalDateTime.now());
         order.setUserId(request.getUserId());
 
-        // Populate ordered items
         List<OrderedItems> orderedItems = new ArrayList<>();
         List<OrderedItemsRequest> orderedItemsList = request.getOrderedItemsDtosList();
         if (orderedItemsList != null) {
+            orderedItemsList.forEach(orderedItemsRequest -> {
+                ProductDto product = productWebClientService.getProductById(orderedItemsRequest.getProductId());
+                if (product == null) {
+                    throw new NotFoundException("Product not found with ID: " + orderedItemsRequest.getProductId());
+                }
+            });
             orderedItems = orderedItemsList.stream()
-                    .map(orderedItemsRequest -> mapToOrderItemsReq(orderedItemsRequest))
+                    .map(this::mapToOrderItemsReq)
                     .collect(Collectors.toList());
         }
         order.setOrderedItemsList(orderedItems);
 
-        // Fetch product names
         List<String> names = orderedItemsList.stream()
                 .map(OrderedItemsRequest::getName)
                 .collect(Collectors.toList());
 
         log.info("SKU codes extracted from the order: {}", names);
 
-        //checks the stock availability for each product by calling 
         InventoryResponse[] productResponses = productWebClientService.checkStock(names);
 
         if (productResponses == null || productResponses.length == 0) {
@@ -79,8 +88,16 @@ public class OrderServiceImpl implements OrderService {
                 throw new IllegalArgumentException("Insufficient quantity for product with SKU: " + name);
             }
         }
+        var savedOrder = orderRepo.save(order);
 
-        return orderRepo.save(order);
+        var response = orderMapper.orderToPlaceOrderResponseDto(savedOrder);
+        List<OrderItemResponseDto> orderItemResponseDtos = orderMapper.orderItemRequestDtoToResponseDto(savedOrder.getOrderedItemsList());
+
+        orderItemResponseDtos.forEach(orderItemResponseDto -> {
+            ProductDto product = productWebClientService.getProductById(orderItemResponseDto.getProductId());
+            orderItemResponseDto.setProductType(product.getType());
+        });
+        return response;
     }
 
 
@@ -89,15 +106,15 @@ public class OrderServiceImpl implements OrderService {
         return orderRepo.findAll();
     }
 
-   public List<Order> getOrdersByUserId(Long userId) {
-    UserDto userDto = userWebClientService.getUserById(userId);
+    public List<Order> getOrdersByUserId(Long userId) {
+        UserDto userDto = userWebClientService.getUserById(userId);
 
-    if (userDto != null) {
-        return orderRepo.findByUserId(userDto.getId());
-    } else {
-        throw new NotFoundException("User not found with ID: " + userId);
+        if (userDto != null) {
+            return orderRepo.findByUserId(userDto.getId());
+        } else {
+            throw new NotFoundException("User not found with ID: " + userId);
+        }
     }
-}
 
     private OrderedItems mapToOrderItemsReq(OrderedItemsRequest itemsRequest) {
         OrderedItems orderedItems = new OrderedItems();
@@ -116,6 +133,7 @@ public class OrderServiceImpl implements OrderService {
         if (userDto != null) {
             return orderRepo.findByUserId(userDto.getId());
         } else {
-            throw new NotFoundException("User not found with ID: " + userId);
-        }    }
+            throw new NotFoundException("User not found with ID: " + id);
+        }
+    }
 }

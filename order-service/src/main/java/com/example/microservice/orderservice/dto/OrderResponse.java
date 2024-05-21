@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrderResponse {
     private String message;
-    private Order order;
+    private PlaceOrderResponseDto order;
 }
 

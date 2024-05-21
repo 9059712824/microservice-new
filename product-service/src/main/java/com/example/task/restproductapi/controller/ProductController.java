@@ -8,9 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.task.restproductapi.entities.NotFoundException;
+import com.example.task.restproductapi.exceptions.NotFoundException;
 import com.example.task.restproductapi.entities.Product;
-import com.example.task.restproductapi.entities.ProductType;
 import com.example.task.restproductapi.service.ProductService;
 import lombok.RequiredArgsConstructor;
 

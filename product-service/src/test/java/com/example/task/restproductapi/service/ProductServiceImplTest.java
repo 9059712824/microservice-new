@@ -15,11 +15,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.example.task.restproductapi.entities.NotFoundException;
+import com.example.task.restproductapi.exceptions.NotFoundException;
 import com.example.task.restproductapi.entities.Product;
 import com.example.task.restproductapi.entities.ProductType;
 import com.example.task.restproductapi.repository.ProductRepository;
-import com.example.task.restproductapi.service.ProductServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
 class ProductServiceImplTest {
@@ -130,7 +129,7 @@ class ProductServiceImplTest {
 
         assertNotNull(result);
         assertEquals(2, result.size());
-        verify(productRepository, times(1)).findByType_Id(type);
+        verify(productRepository, times(1)).findByType_Id(id);
     }
 
     @Test

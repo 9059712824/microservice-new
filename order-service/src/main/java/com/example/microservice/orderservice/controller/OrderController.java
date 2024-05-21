@@ -2,6 +2,7 @@ package com.example.microservice.orderservice.controller;
 
 import com.example.microservice.orderservice.dto.OrderRequest;
 import com.example.microservice.orderservice.dto.OrderResponse;
+import com.example.microservice.orderservice.dto.PlaceOrderResponseDto;
 import com.example.microservice.orderservice.model.Order;
 import com.example.microservice.orderservice.service.OrderService;
 import com.example.microservice.orderservice.service.UserWebClientService;
@@ -34,7 +35,7 @@ public class OrderController {
 
         log.info("{}",request);
 
-        Order order = orderService.placeOrder(request);
+        PlaceOrderResponseDto order = orderService.placeOrder(request);
         if (order == null) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new OrderResponse("Failed to place order.", null));
         }

@@ -32,7 +32,7 @@ public class ProductWebClientService {
                 .block();
     }
 
-        public ProductTypeDto getProductTypeById(Long id) {
+    public ProductTypeDto getProductTypeById(Long id) {
         return webClientBuilder.build()
                 .get()
                 .uri("http://product-service/productType/{id}", id)
@@ -41,12 +41,12 @@ public class ProductWebClientService {
                 .block();
     }
 
-    public ProductDto getProductById(Long id){
+    public ProductDto getProductById(Long id) {
         return webClientBuilder.build()
                 .get()
                 .uri("http://product-service/api/product/{id}", id)
                 .retrieve()
                 .bodyToMono(ProductDto.class)
-                .block();    }
-
+                .block();
+    }
 }

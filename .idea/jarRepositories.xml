@@ -7,6 +7,11 @@
       <option name="url" value="https://nexus3-aprr-sagt.apps.cicd.arcus.soprasteria.com/repository/maven-public/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="https://repo.maven.apache.org/maven2" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="nexus-public" />
       <option name="name" value="nexus3" />
       <option name="url" value="https://nexus3-aprr-sagt.apps.cicd.arcus.soprasteria.com/repository/maven-public/" />

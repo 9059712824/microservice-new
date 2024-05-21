@@ -23,18 +23,18 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
-    private final JwtAuthenticationEntryPoint  authenticationEntryPoint;
+    private final JwtAuthenticationEntryPoint authenticationEntryPoint;
     private final JwtAuthenticationFilter authenticationFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.
-                 csrf(csrf-> csrf.disable())
-                .cors(cors-> cors.disable())
+                csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.disable())
                 .authorizeRequests(authorize -> {
                     authorize
-                            .requestMatchers("/authorize/**","/users/**","/inventory/**").permitAll()
+                            .requestMatchers("/authorize/**", "/users/**", "/inventory/**").permitAll()
                             .requestMatchers(
                                     "/swagger-ui/**",
                                     "/swagger-ui.html",
@@ -51,12 +51,14 @@ public class SecurityConfig {
         return http.build();
 
     }
+
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception{
-        return  builder.getAuthenticationManager();
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception {
+        return builder.getAuthenticationManager();
     }
-        @Bean
-    public PasswordEncoder passwordEncoder(){
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 

@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import com.example.task.restproductapi.Dto.UserDto;
 import org.springframework.stereotype.Service;
 
-import com.example.task.restproductapi.entities.NotFoundException;
+import com.example.task.restproductapi.exceptions.NotFoundException;
 import com.example.task.restproductapi.entities.User;
 import com.example.task.restproductapi.repository.UserRepo;
 

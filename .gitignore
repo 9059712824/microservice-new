@@ -2,3 +2,4 @@
 /discovery-server/target/
 /order-service/target/
 /product-service/target/
+.idea
