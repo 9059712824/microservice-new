@@ -1,8 +1,10 @@
-package com.example.microservice.orderservice.service;
+package com.example.microservice.orderservice.webclient;
 
 import com.example.microservice.orderservice.dto.InventoryResponse;
 
 import com.example.microservice.orderservice.dto.ProductDto;
+import com.example.microservice.orderservice.dto.ProductTypeDto;
+import com.example.microservice.orderservice.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,7 @@ import java.util.List;
 @Slf4j
 public class ProductWebClientService {
     private final WebClient.Builder webClientBuilder;
+    private final JwtTokenProvider jwtTokenProvider;
 
     public InventoryResponse[] checkStock(List<String> names) {
         String url = "http://product-service/inventory/checkStock?name=" + String.join(",", names);
@@ -36,6 +39,7 @@ public class ProductWebClientService {
         return webClientBuilder.build()
                 .get()
                 .uri("http://product-service/productType/{id}", id)
+                .header("Authorization", "Bearer " + jwtTokenProvider.getToken())
                 .retrieve()
                 .bodyToMono(ProductTypeDto.class)
                 .block();
@@ -45,6 +49,7 @@ public class ProductWebClientService {
         return webClientBuilder.build()
                 .get()
                 .uri("http://product-service/api/product/{id}", id)
+                .header("Authorization", "Bearer " + jwtTokenProvider.getToken())
                 .retrieve()
                 .bodyToMono(ProductDto.class)
                 .block();

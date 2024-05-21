@@ -1,4 +1,4 @@
-package com.example.microservice.orderservice.model;
+package com.example.microservice.orderservice.entity;
 
 import com.example.microservice.orderservice.Enum.OrderStatus;
 import jakarta.persistence.*;

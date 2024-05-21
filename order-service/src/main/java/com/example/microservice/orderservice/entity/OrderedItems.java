@@ -1,4 +1,4 @@
-package com.example.microservice.orderservice.model;
+package com.example.microservice.orderservice.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

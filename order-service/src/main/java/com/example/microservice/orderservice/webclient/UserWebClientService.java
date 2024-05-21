@@ -1,4 +1,4 @@
-package com.example.microservice.orderservice.service;
+package com.example.microservice.orderservice.webclient;
 
 import com.example.microservice.orderservice.dto.UserDto;
 import lombok.RequiredArgsConstructor;

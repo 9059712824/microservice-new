@@ -4,9 +4,11 @@ import com.example.microservice.orderservice.Enum.OrderStatus;
 import com.example.microservice.orderservice.Exception.NotFoundException;
 import com.example.microservice.orderservice.dto.*;
 import com.example.microservice.orderservice.mapper.OrderMapper;
-import com.example.microservice.orderservice.model.Order;
-import com.example.microservice.orderservice.model.OrderedItems;
+import com.example.microservice.orderservice.entity.Order;
+import com.example.microservice.orderservice.entity.OrderedItems;
 import com.example.microservice.orderservice.repo.OrderRepo;
+import com.example.microservice.orderservice.webclient.ProductWebClientService;
+import com.example.microservice.orderservice.webclient.UserWebClientService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -56,13 +58,13 @@ public class OrderServiceImpl implements OrderService {
             });
             orderedItems = orderedItemsList.stream()
                     .map(this::mapToOrderItemsReq)
-                    .collect(Collectors.toList());
+                    .toList();
         }
         order.setOrderedItemsList(orderedItems);
 
         List<String> names = orderedItemsList.stream()
                 .map(OrderedItemsRequest::getName)
-                .collect(Collectors.toList());
+                .toList();
 
         log.info("SKU codes extracted from the order: {}", names);
 
@@ -97,6 +99,7 @@ public class OrderServiceImpl implements OrderService {
             ProductDto product = productWebClientService.getProductById(orderItemResponseDto.getProductId());
             orderItemResponseDto.setProductType(product.getType());
         });
+        response.setOrderedItemsList(orderItemResponseDtos);
         return response;
     }
 
@@ -128,7 +131,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getOrdersByProductType(Long id) {
-        ProductTypeDto userDto = productWebClientService.getProductTypeById(id);
+        var userDto = productWebClientService.getProductTypeById(id);
 
         if (userDto != null) {
             return orderRepo.findByUserId(userDto.getId());

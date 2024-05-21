@@ -1,8 +1,6 @@
 package com.example.microservice.orderservice.dto;
 
 import com.example.microservice.orderservice.Enum.OrderStatus;
-import com.example.microservice.orderservice.model.OrderedItems;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

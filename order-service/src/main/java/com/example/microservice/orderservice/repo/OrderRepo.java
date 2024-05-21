@@ -1,6 +1,6 @@
 package com.example.microservice.orderservice.repo;
 
-import com.example.microservice.orderservice.model.Order;
+import com.example.microservice.orderservice.entity.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
