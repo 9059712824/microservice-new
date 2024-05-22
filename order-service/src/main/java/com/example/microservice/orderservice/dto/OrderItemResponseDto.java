@@ -19,5 +19,4 @@ public class OrderItemResponseDto {
     private String name;
     private BigDecimal price;
     private Long quantity;
-    private PaymentMode paymentMode;
 }

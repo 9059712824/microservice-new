@@ -46,6 +46,7 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderStatus(OrderStatus.PLACED);
         order.setPurchasedDate(LocalDateTime.now());
         order.setUserId(request.getUserId());
+        order.setPaymentMode(request.getPaymentMode());
 
         List<OrderedItems> orderedItems = new ArrayList<>();
         List<OrderedItemsRequest> orderedItemsList = request.getOrderedItemsDtosList();

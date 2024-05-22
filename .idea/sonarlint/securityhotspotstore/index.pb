@@ -3,16 +3,12 @@
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 á
 Wproduct-service/src/main/java/com/example/task/restproductapi/Config/OpenApiConfig.java,a\a\aadce261277f333c3fc45424045714dbd6bab2c2
-ñ
-forder-service/src/main/java/com/example/microservice/orderservice/service/ProductWebClientService.java,6\a\6ae32ddc8468010d080dee1f907b44d559b23d9a
 E
 order-service/pom.xml,d\3\d3bf53ecc442740843266a635cbfe9807b992566
 à
 Xproduct-service/src/main/java/com/example/task/restproductapi/Config/SecurityConfig.java,c\6\c666d41be8aaad7d2d9955d90f30636fcb72d319
 è
 _order-service/src/main/java/com/example/microservice/orderservice/service/OrderServiceImpl.java,2\c\2ccb14520e8951918eea077f38e16e7eeca7b488
-ì
-corder-service/src/main/java/com/example/microservice/orderservice/service/UserWebClientService.java,1\0\1084bb3292af7cdc175d2edc9123ef1eea1f6062
 G
 product-service/pom.xml,f\c\fcf146007330bb14605a232d25428bbf6aa50b7b
 á
@@ -25,8 +21,6 @@ _product-service/src/main/java/com/example/task/restproductapi/service/Inventory
 Pproduct-service/src/main/java/com/example/task/restproductapi/entities/Cart.java,8\d\8dbc93e43823caddbbc594a3e1c14c6c60b4c9d6
 å
 \product-service/src/main/java/com/example/task/restproductapi/repository/CartRepository.java,5\5\552b848fbd5eb887cade6799c0f8a382c56a344f
-Ö
-Uproduct-service/src/main/java/com/example/task/restproductapi/service/CartSevice.java,4\4\446c603d4dd21535f17fce7569f813408ba8d8d9
 Ü
 Vproduct-service/src/main/java/com/example/task/restproductapi/service/CartService.java,4\6\463ffef83383c2e3f5ffb986cf5f5422c8efc517
 ä
@@ -43,10 +37,6 @@ Zproduct-service/src/main/java/com/example/task/restproductapi/service/UserServi
 Tproduct-service/src/main/java/com/example/task/restproductapi/mapper/CartMapper.java,1\3\135376346679317fe78d70c37e05af93e386df72
 ì
 cproduct-service/src/test/java/com/example/task/restproductapi/controller/ProductControllerTest.java,2\e\2e08331d36853de9ae0370962b2c493882e82c46
-ç
-]product-service/src/main/java/com/example/task/restproductapi/entities/NotFoundException.java,6\0\602484c0eee93bf37794bd2db6f95b5ae98b9a62
-ä
-Zproduct-service/src/main/java/com/example/task/restproductapi/entities/FoundException.java,6\a\6aac3c44d69bb97572fb5b2de3d7bf126261bb4a
 è
 _product-service/src/main/java/com/example/task/restproductapi/exceptions/NotFoundException.java,b\5\b543c345ee81d300804db8f91fd2d5a3685819d1
 å
@@ -98,8 +88,6 @@ w
 G.idea/sonarlint/issuestore/4/4/442292b8a7efeabbe4cc176709b833b1792140ec,8\6\863e0292fd7e9b3e74dafd6cc01f73ba76346482
 ã
 [order-service/src/main/java/com/example/microservice/orderservice/service/OrderService.java,a\7\a7130ae529beb93388e7c1e7ba4dde4849297835
-ç
-]order-service/src/main/java/com/example/microservice/orderservice/service/ProductTypeDto.java,c\e\cebf3489fd3e2d02623f0980afced38531f027e6
 ]
 -.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e
 ï
@@ -116,8 +104,6 @@ gproduct-service/src/main/java/com/example/task/restproductapi/Security/JwtAuthe
 cproduct-service/src/main/java/com/example/task/restproductapi/Security/JwtAuthenticationFilter.java,1\9\19f287c0501bc5a0a074480c4e04a8a5eceb1973
 Ö
 Uproduct-service/src/main/java/com/example/task/restproductapi/Security/JwtHelper.java,9\5\952b4be912eb35f55d37b2a95a9142d7b7b4471b
-è
-_order-service/src/main/java/com/example/microservice/orderservice/service/JwtTokenProvider.java,0\1\01dc32bc17fa0089177bca6aab80e51909a06f6a
 â
 Yorder-service/src/main/java/com/example/microservice/orderservice/dto/ProductTypeDto.java,b\c\bc067f04c53180c91051a0875c7db48a6d705326
 ê
@@ -132,3 +118,7 @@ Sorder-service/src/main/java/com/example/microservice/orderservice/entity/Order.
 Uorder-service/src/main/java/com/example/microservice/orderservice/repo/OrderRepo.java,4\e\4ebd7bd1e1277088b13e545a6180ef147f6f7f43
 ä
 Zorder-service/src/main/java/com/example/microservice/orderservice/entity/OrderedItems.java,d\c\dc16441d72d993655a34f943c9cbc62905d999da
+á
+Worder-service/src/main/java/com/example/microservice/orderservice/dto/OrderRequest.java,a\6\a6ac29447b303eb26aa24b5517c0a883e3b06a07
+å
+\order-service/src/main/java/com/example/microservice/orderservice/dto/InventoryResponse.java,d\3\d3a990d59122b08a976ae2636d333fed9ac816c6
